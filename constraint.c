@@ -141,6 +141,8 @@ IBTree *IBTCopy(IBTree *f)
             return( IBTNewOp(IBTop(f),l,r) );
             break;
     }
+    //Added in case no case is satisfied
+    return NULL;
 }
 
 
@@ -191,6 +193,8 @@ int IBTDerivable(IBTree *f)
             }
             break;
     }
+    //Added in case no case is satisfied
+    return( 0 );
 }
 
 
@@ -443,6 +447,8 @@ struct IBListDepNodes *IBCVCreateLDN(IBTree *f, struct IBListDepNodes *l,
         }
     }
     else return( l );
+    //added this one because xcode was complaining
+    return (l);
 }
 
 
