@@ -17,7 +17,7 @@
 #include "narrowing_newton.h"
 #include "search.h"
 #include "main.h"
-
+#include "config.h"
 
 /* Structures used to represent a constraint system */
 IBVariables   variables;           /* array of constrained variables */
@@ -94,6 +94,7 @@ int yyerror(char* s)
 {
     IBNbParsingError++;
     strcpy(IBParsingError,s);
+    return 0;
 }
 
 
@@ -103,6 +104,7 @@ int yywarning(char* s)
  */
 {
     printf("  !! l.%d: warning: %s\n",IByyline,s);
+    return 0;
 }
 
 
@@ -567,7 +569,7 @@ main(int argc, char **argv)
         IBFreeV(variables);
         IBOperationsFree(operations);
         IBClockFree();
-        return;
+        return 0;
     }
     
     if( argVerbose )
@@ -578,7 +580,7 @@ main(int argc, char **argv)
     if( !argFile )
     {
         printf("  !! error: input file not found [use '%s -h' for help]\n\n",software_run);
-        return;
+        return 0;
     }
     
     if (strcmp(IBarguments,"")!=0) {

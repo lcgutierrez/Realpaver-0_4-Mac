@@ -43,26 +43,11 @@ extern double nextafter();
 
 extern double pow(double,double);
 
-
-/****************************************************************************
- *                                  SPARC                                   *
- ****************************************************************************/
-#if SYSTEM_SPARC
-
-#  include <floatingpoint.h>
-#  include <sys/ieeefp.h>
-
-#  define RoundDownward fpsetround(3)
-#  define RoundUpward   fpsetround(2)
-#  define RoundNearest  fpsetround(0)
-
-static const double IBBasicInfinity = 1.0/0.0;
-#  define IBBasicMaxDouble 1.797693134862315708e+308
-
 /****************************************************************************
  *                             PC i386 & linux                              *
  ****************************************************************************/
-#elif SYSTEM_LINUX_IX86
+/*
+#if SYSTEM_LINUX_IX86
 
 #  include <fenv.h>
 #  include <values.h>
@@ -73,23 +58,7 @@ static const double IBBasicInfinity = 1.0/0.0;
 
 #  define IBBasicInfinity  HUGE_VAL
 #  define IBBasicMaxDouble MAXDOUBLE
-
-/****************************************************************************
- *                                MIPS SGI                                  *
- ****************************************************************************/
-#elif SYSTEM_SGI
-
-#  include <float.h>
-#  include <ieeefp.h>
-
-#  define RoundDownward fpsetround(3)
-#  define RoundUpward   fpsetround(2)
-#  define RoundNearest  fpsetround(0)
-
-static const double IBBasicInfinity = 1.0/0.0;
-#  define IBBasicMaxDouble DBL_MAX
-
-#endif
+*/
 
 /****************************************************************************
  *                                DARWIN                                    *

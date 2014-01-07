@@ -1231,13 +1231,13 @@ int IBHC3MaxII(IBTree *f)
     return( 1 );
 }
 
-
 int IBHC3CosI(IBTree *f)
 /***************************************************************************
  *  HC3revise on operation CosI
  */
 {
     /* not yet implemented */
+    return 0;
 }
 
 
@@ -1247,6 +1247,7 @@ int IBHC3SinI(IBTree *f)
  */
 {
     /* not yet implemented */
+    return 0;
 }
 
 
@@ -1256,6 +1257,7 @@ int IBHC3TanI(IBTree *f)
  */
 {
     /* not yet implemented */
+    return 0;
 }
 
 
@@ -1316,6 +1318,7 @@ int IBHC3AcosI(IBTree *f)
  */
 {
     /* not yet implemented */
+    return 0;
 }
 
 
@@ -1325,6 +1328,7 @@ int IBHC3AsinI(IBTree *f)
  */
 {
     /* not yet implemented */
+    return 0;
 }
 
 
@@ -1334,6 +1338,7 @@ int IBHC3AtanI(IBTree *f)
  */
 {
     /* not yet implemented */
+    return 0;
 }
 
 

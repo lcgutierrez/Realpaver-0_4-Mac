@@ -147,6 +147,8 @@ double IBPrevDoubleInU(IBUnion *u, double x)
             return( IBMaxI(IBUnionItv(u,k)) );
         }
     }
+    //added in case no satisfied
+    return 0;
 }
 
 
@@ -164,6 +166,8 @@ double IBNextDoubleInU(IBUnion *u, double x)
             return( IBMinI(IBUnionItv(u,k)) );
         }
     }
+    //added in case if is not satisfied
+    return 0;
 }
 
 
