@@ -1515,6 +1515,7 @@ int yyparse (void *YYPARSE_PARAM);
 #else
 int yyparse ();
 #endif
+
 #else /* ! YYPARSE_PARAM */
 #if defined __STDC__ || defined __cplusplus
 int yyparse (void);
@@ -1543,22 +1544,17 @@ int yynerrs;
 #ifdef YYPARSE_PARAM
 #if (defined __STDC__ || defined __C99__FUNC__ \
 || defined __cplusplus || defined _MSC_VER)
-int
-yyparse (void *YYPARSE_PARAM)
+int yyparse (void *YYPARSE_PARAM)
 #else
-int
-yyparse (YYPARSE_PARAM)
+int yyparse (YYPARSE_PARAM)
 void *YYPARSE_PARAM;
 #endif
 #else /* ! YYPARSE_PARAM */
 #if (defined __STDC__ || defined __C99__FUNC__ \
 || defined __cplusplus || defined _MSC_VER)
-int
-yyparse (void)
+int yyparse (void)
 #else
-int
-yyparse ()
-
+int yyparse ()
 #endif
 #endif
 {
