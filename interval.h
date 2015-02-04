@@ -16,39 +16,40 @@
 
 #include "profile.h"
 #include "interval_interface.h"
+#include "config.h"
 #include <stdio.h>
 #include <math.h>
 
 /* variables used for profiling */
 #if SOFTWARE_PROFILE
 unsigned long
-IBNumberAdd,
-IBNumberSub,
-IBNumberMul,
-IBNumberDiv,
-IBNumberExtDiv,
-IBNumberNthRootRel,
-IBNumberSqr,
-IBNumberSqrt,
-IBNumberPow,
-IBNumberExp,
-IBNumberLog,
-IBNumberMin,
-IBNumberMax,
-IBNumberCos,
-IBNumberSin,
-IBNumberTan,
-IBNumberCosh,
-IBNumberSinh,
-IBNumberTanh,
-IBNumberAcos,
-IBNumberAsin,
-IBNumberAtan,
-IBNumberAcosh,
-IBNumberAsinh,
-IBNumberAtanh,
-IBNumberCoshRel,
-IBNumberSinRel;
+  IBNumberAdd,
+  IBNumberSub,
+  IBNumberMul,
+  IBNumberDiv,
+  IBNumberExtDiv,
+  IBNumberNthRootRel,
+  IBNumberSqr,
+  IBNumberSqrt,
+  IBNumberPow,
+  IBNumberExp,
+  IBNumberLog,
+  IBNumberMin,
+  IBNumberMax,
+  IBNumberCos,
+  IBNumberSin,
+  IBNumberTan,
+  IBNumberCosh,
+  IBNumberSinh,
+  IBNumberTanh,
+  IBNumberAcos,
+  IBNumberAsin,
+  IBNumberAtan,
+  IBNumberAcosh,
+  IBNumberAsinh,
+  IBNumberAtanh,
+  IBNumberCoshRel,
+  IBNumberSinRel;
 #endif
 
 
@@ -138,368 +139,368 @@ typedef IBInterval                  IBItv[1];
 
 
 /* conversion of string to interval; the string represents a float
- The result is correctly rounded interval */
+   The result is correctly rounded interval */
 static inline void IBStrToI(char *s, IBInterval*i) {
-    IBStringToI(s,i);
+  IBStringToI(s,i);
 }
 
 /* arithmetic operations and elementary functions:
- - IBDefxxx is the name of the C function
- - IBxxx is the call of IBDefxxx
- */
+   - IBDefxxx is the name of the C function
+   - IBxxx is the call of IBDefxxx
+*/
 
 
 static inline void IBAddII(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBAdditionII(j,i1,i2);
+  IBAdditionII(j,i1,i2);
 #if SOFTWARE_PROFILE
-    IBNumberAdd++;
+  IBNumberAdd++;
 #endif
 }
 #define IBDefAddII IBAddII
 
 static inline void IBAddRI(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBAdditionRI(j,i1,i2);
+  IBAdditionRI(j,i1,i2);
 #if SOFTWARE_PROFILE
-    IBNumberAdd++;
+  IBNumberAdd++;
 #endif
 }
 #define IBDefAddRI IBAddRI
 
 static inline void IBSubII(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBSubstractionII(j,i1,i2);
+  IBSubstractionII(j,i1,i2);
 #if SOFTWARE_PROFILE
-    IBNumberSub++;
+  IBNumberSub++;
 #endif
 }
 #define IBDefSubII IBSubII
 
 static inline void IBSubRI(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBSubstractionRI(j,i1,i2);
+  IBSubstractionRI(j,i1,i2);
 #if SOFTWARE_PROFILE
-    IBNumberSub++;
+  IBNumberSub++;
 #endif
 }
 #define IBDefSubRI IBSubRI
 
 static inline void IBSubIR(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBSubstractionIR(j,i1,i2);
+  IBSubstractionIR(j,i1,i2);
 #if SOFTWARE_PROFILE
-    IBNumberSub++;
+  IBNumberSub++;
 #endif
 }
 #define IBDefSubIR IBSubIR
 
 static inline void IBNegI(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBNegationI(j,i1,i2);
+  IBNegationI(j,i1,i2);
 #if SOFTWARE_PROFILE
-    IBNumberSub++;
+  IBNumberSub++;
 #endif
 }
 #define IBDefNegI IBNegI
 
 static inline void IBMulII(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBMultiplicationII(j,i1,i2);
+  IBMultiplicationII(j,i1,i2);
 #if SOFTWARE_PROFILE
-    IBNumberMul++;
+  IBNumberMul++;
 #endif
 }
 #define IBDefMulII IBMulII
 
 static inline void IBMulRI(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBMultiplicationRI(j,i1,i2);
+  IBMultiplicationRI(j,i1,i2);
 #if SOFTWARE_PROFILE
-    IBNumberMul++;
+  IBNumberMul++;
 #endif
 }
 #define IBDefMulRI IBMulRI
 
 static inline void IBMulRnegI(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBMultiplicationRnegI(j,i1,i2);
+  IBMultiplicationRnegI(j,i1,i2);
 #if SOFTWARE_PROFILE
-    IBNumberMul++;
+  IBNumberMul++;
 #endif
 }
 #define IBDefMulRnegI IBMulRnegI
 
 static inline void IBMulRposI(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBMultiplicationRposI(j,i1,i2);
+  IBMultiplicationRposI(j,i1,i2);
 #if SOFTWARE_PROFILE
-    IBNumberMul++;
+  IBNumberMul++;
 #endif
 }
 #define IBDefMulRposI IBMulRposI
 
 static inline void IBDivII(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBDivisionII(j,i1,i2);
+  IBDivisionII(j,i1,i2);
 #if SOFTWARE_PROFILE
-    IBNumberDiv++;
+  IBNumberDiv++;
 #endif
 }
 #define IBDefDivII IBDivII
 
 static inline void IBDivIR(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBDivisionIR(j,i1,i2);
+  IBDivisionIR(j,i1,i2);
 #if SOFTWARE_PROFILE
-    IBNumberDiv++;
+  IBNumberDiv++;
 #endif
 }
 #define IBDefDivIR IBDivIR
 
 static inline void IBDivRI(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBDivisionRI(j,i1,i2);
+  IBDivisionRI(j,i1,i2);
 #if SOFTWARE_PROFILE
-    IBNumberDiv++;
+  IBNumberDiv++;
 #endif
 }
 #define IBDefDivRI IBDivRI
 
 static inline void IBDivIRneg(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBDivisionIRneg(j,i1,i2);
+  IBDivisionIRneg(j,i1,i2);
 #if SOFTWARE_PROFILE
-    IBNumberDiv++;
+  IBNumberDiv++;
 #endif
 }
 #define IBDefDivIRneg IBDivIRneg
 
 static inline void IBDivIRpos(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBDivisionIRpos(j,i1,i2);
+  IBDivisionIRpos(j,i1,i2);
 #if SOFTWARE_PROFILE
-    IBNumberDiv++;
+  IBNumberDiv++;
 #endif
 }
 #define IBDefDivIRpos IBDivIRpos
 
 static inline void IBDivRnegI(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBDivisionRnegI(j,i1,i2);
+  IBDivisionRnegI(j,i1,i2);
 #if SOFTWARE_PROFILE
-    IBNumberDiv++;
+  IBNumberDiv++;
 #endif
 }
 #define IBDefDivRnegI IBDivRnegI
 
 static inline void IBDivRposI(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBDivisionRposI(j,i1,i2);
+  IBDivisionRposI(j,i1,i2);
 #if SOFTWARE_PROFILE
-    IBNumberDiv++;
+  IBNumberDiv++;
 #endif
 }
 #define IBDefDivRposI IBDivRposI
 
 static inline void IBSqrI(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBSquareI(j,i1,i2);
+  IBSquareI(j,i1,i2);
 #if SOFTWARE_PROFILE
-    IBNumberSqr++;
+  IBNumberSqr++;
 #endif
 }
 #define IBDefSqrI IBSqrI
 
 static inline void IBSqrtI(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBSquareRoot(j,i1,i2);
+  IBSquareRoot(j,i1,i2);
 #if SOFTWARE_PROFILE
-    IBNumberSqrt++;
+  IBNumberSqrt++;
 #endif
 }
 #define IBDefSqrtI IBSqrtI
 
 static inline void IBPowI(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBPowerIR(j,i1,i2);
+  IBPowerIR(j,i1,i2);
 #if SOFTWARE_PROFILE
-    IBNumberPow++;
+  IBNumberPow++;
 #endif
 }
 #define IBDefPowI IBPowI
 
 static inline void IBExpI(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBExponentialI(j,i1,i2);
+  IBExponentialI(j,i1,i2);
 #if SOFTWARE_PROFILE
-    IBNumberExp++;
+  IBNumberExp++;
 #endif
 }
 #define IBDefExpI IBExpI
 
 static inline void IBLogI(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBLogarithmI(j,i1,i2);
+  IBLogarithmI(j,i1,i2);
 #if SOFTWARE_PROFILE
-    IBNumberLog++;
+  IBNumberLog++;
 #endif
 }
 #define IBDefLogI IBLogI
 
 static inline void IBMinimumII(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBMinimumOfII(j,i1,i2);
+  IBMinimumOfII(j,i1,i2);
 #if SOFTWARE_PROFILE
-    IBNumberMin++;
+  IBNumberMin++;
 #endif
 }
 #define IBDefMinimumII IBMinimumII
 
 static inline void IBMaximumII(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBMaximumOfII(j,i1,i2);
+  IBMaximumOfII(j,i1,i2);
 #if SOFTWARE_PROFILE
-    IBNumberMax++;
+  IBNumberMax++;
 #endif
 }
 #define IBDefMaximumII IBMaximumII
 
 
 static inline void IBCosI(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBCosineI(j,i1,i2);
+  IBCosineI(j,i1,i2);
 #if SOFTWARE_PROFILE
-    IBNumberCos++;
+  IBNumberCos++;
 #endif
 }
 #define IBDefCosI IBCosI
 
 static inline void IBSinI(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBSineI(j,i1,i2);
+  IBSineI(j,i1,i2);
 #if SOFTWARE_PROFILE
-    IBNumberSin++;
+  IBNumberSin++;
 #endif
 }
 #define IBDefSinI IBSinI
 
 static inline void IBTanI(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBTangentI(j,i1,i2);
+  IBTangentI(j,i1,i2);
 #if SOFTWARE_PROFILE
-    IBNumberTan++;
+  IBNumberTan++;
 #endif
 }
 #define IBDefTanI IBTanI
 
 static inline void IBCoshI(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBCosHypI(j,i1,i2);
+  IBCosHypI(j,i1,i2);
 #if SOFTWARE_PROFILE
-    IBNumberCosh++;
+  IBNumberCosh++;
 #endif
 }
 #define IBDefCoshI IBCoshI
 
 static inline void IBSinhI(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBSinHypI(j,i1,i2);
+  IBSinHypI(j,i1,i2);
 #if SOFTWARE_PROFILE
-    IBNumberSinh++;
+  IBNumberSinh++;
 #endif
 }
 #define IBDefSinhI IBSinhI
 
 static inline void IBTanhI(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBTanHypI(j,i1,i2);
+  IBTanHypI(j,i1,i2);
 #if SOFTWARE_PROFILE
-    IBNumberTanh++;
+  IBNumberTanh++;
 #endif
 }
 #define IBDefTanhI IBTanhI
 
 static inline void IBAcosI(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBArcCosI(j,i1,i2);
+  IBArcCosI(j,i1,i2);
 #if SOFTWARE_PROFILE
-    IBNumberAcos++;
+  IBNumberAcos++;
 #endif
 }
 #define IBDefAcosI IBAcosI
 
 static inline void IBAsinI(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBArcSinI(j,i1,i2);
+  IBArcSinI(j,i1,i2);
 #if SOFTWARE_PROFILE
-    IBNumberAsin++;
+  IBNumberAsin++;
 #endif
 }
 #define IBDefAsinI IBAsinI
 
 static inline void IBAtanI(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBArcTanI(j,i1,i2);
+  IBArcTanI(j,i1,i2);
 #if SOFTWARE_PROFILE
-    IBNumberAtan++;
+  IBNumberAtan++;
 #endif
 }
 #define IBDefAtanI IBAtanI
 
 static inline void IBAcoshI(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBArcCosHypI(j,i1,i2);
+  IBArcCosHypI(j,i1,i2);
 #if SOFTWARE_PROFILE
-    IBNumberAcosh++;
+  IBNumberAcosh++;
 #endif
 }
 #define IBDefAcoshI IBAcoshI
 
 static inline void IBAsinhI(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBArcSinHypI(j,i1,i2);
+  IBArcSinHypI(j,i1,i2);
 #if SOFTWARE_PROFILE
-    IBNumberAsinh++;
+  IBNumberAsinh++;
 #endif
 }
 #define IBDefAsinhI IBAsinhI
 
 static inline void IBAtanhI(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBArcTanHypI(j,i1,i2);
+  IBArcTanHypI(j,i1,i2);
 #if SOFTWARE_PROFILE
-    IBNumberAtanh++;
+  IBNumberAtanh++;
 #endif
 }
 #define IBDefAtanhI IBAtanhI
 
 static inline int IBExtDivII(IBInterval* j, IBInterval* k, IBInterval* i1, IBInterval* i2) {
 #if SOFTWARE_PROFILE
-    IBNumberExtDiv++;
+  IBNumberExtDiv++;
 #endif
-    return IBExtendedDivisionII(j,k,i1,i2);
+  return IBExtendedDivisionII(j,k,i1,i2);
 }
 
 static inline int IBExtDivInterII(IBInterval* j, IBInterval* i1, IBInterval* i2) {
 #if SOFTWARE_PROFILE
-    IBNumberExtDiv++;
+  IBNumberExtDiv++;
 #endif
-    return IBExtendedDivisionInterII(j,i1,i2);
+  return IBExtendedDivisionInterII(j,i1,i2);
 }
 
 static inline int IBNthRootRelI(IBInterval* j, IBInterval* k,
                                 IBInterval* i, IBInterval* n) {
 #if SOFTWARE_PROFILE
-    IBNumberNthRootRel++;
+  IBNumberNthRootRel++;
 #endif
-    return IBNthRootRelationalI(j,k,i,n);
+  return IBNthRootRelationalI(j,k,i,n);
 }
 
 static inline int IBCoshRelI(IBInterval* j, IBInterval* k, IBInterval* i) {
 #if SOFTWARE_PROFILE
-    IBNumberCoshRel++;
+  IBNumberCoshRel++;
 #endif
-    return IBCoshRelationalI(j,k,i);
+  return IBCoshRelationalI(j,k,i);
 }
 
 static inline int IBSinRelI(IBInterval* j, IBInterval* k, IBInterval* l,
                             IBInterval* i) {
 #if SOFTWARE_PROFILE
-    IBNumberSinRel++;
+  IBNumberSinRel++;
 #endif
-    return IBSinRelationalI(j,k,l,i);
+  return IBSinRelationalI(j,k,l,i);
 }
 
 static inline void IBMulRposIinternal(IBInterval* j, double x, IBInterval* i2) {
-    IBMulRealposI(j,x,i2);
+  IBMulRealposI(j,x,i2);
 #if SOFTWARE_PROFILE
-    IBNumberMul++;
+  IBNumberMul++;
 #endif
 }
 
 static inline void IBMulRIinternal(IBInterval* j, double x, IBInterval* i) {
-    IBMulRealI(j,x,i);
+  IBMulRealI(j,x,i);
 #if SOFTWARE_PROFILE
-    IBNumberMul++;
+  IBNumberMul++;
 #endif
 }
 
 static inline void IBDivRposIinternal(IBInterval* j, double x, IBInterval* i) {
-    IBDivRealposI(j,x,i);
+  IBDivRealposI(j,x,i);
 #if SOFTWARE_PROFILE
-    IBNumberDiv++;
+  IBNumberDiv++;
 #endif
 }
 
 static inline void IBPowIinternal(IBInterval* j, IBInterval* i, int n) {
-    IBPowerIN(j,i,n);
+  IBPowerIN(j,i,n);
 #if SOFTWARE_PROFILE
-    IBNumberPow++;
+  IBNumberPow++;
 #endif
 }
 
@@ -515,273 +516,273 @@ void IBInitIntervalConstants();
 
 static inline void IBInitIA() {
 #if SOFTWARE_PROFILE
-    IBNumberAdd =
-    IBNumberSub =
-    IBNumberMul =
-    IBNumberDiv =
-    IBNumberDiv =
-    IBNumberSqr =
-    IBNumberSqrt =
-    IBNumberPow =
-    IBNumberExp =
-    IBNumberLog =
-    IBNumberMin =
-    IBNumberMax =
-    IBNumberCos =
-    IBNumberSin =
-    IBNumberTan =
-    IBNumberCosh =
-    IBNumberSinh =
-    IBNumberTanh =
-    IBNumberAcos =
-    IBNumberAsin =
-    IBNumberAtan =
-    IBNumberAcosh =
-    IBNumberAsinh =
-    IBNumberAtanh =
-    IBNumberCoshRel =
-    IBNumberSinRel
-    = 0 ;
+  IBNumberAdd = 
+  IBNumberSub = 
+  IBNumberMul = 
+  IBNumberDiv = 
+  IBNumberDiv = 
+  IBNumberSqr = 
+  IBNumberSqrt = 
+  IBNumberPow = 
+  IBNumberExp = 
+  IBNumberLog =
+  IBNumberMin =
+  IBNumberMax =
+  IBNumberCos =
+  IBNumberSin =
+  IBNumberTan =
+  IBNumberCosh =
+  IBNumberSinh =
+  IBNumberTanh =
+  IBNumberAcos =
+  IBNumberAsin =
+  IBNumberAtan =
+  IBNumberAcosh =
+  IBNumberAsinh =
+  IBNumberAtanh =
+  IBNumberCoshRel =
+  IBNumberSinRel
+  = 0 ;
 #endif
-    
-    IBInitIntervalConstants();
-    IBInitInterval();
+
+  IBInitIntervalConstants();
+  IBInitInterval();
 }
 
 
 /* output of profiling information */
 static inline int _IBNbDigits(unsigned long x) {
-    int d = 1;
-    while (x>=10) { ++d; x/=10;}
-    return d;
+  int d = 1;
+  while (x>=10) { ++d; x/=10;}
+  return d;
 }
 
 static inline void _IBprintlong(char *s, unsigned long x, int esp) {
-    int d = _IBNbDigits(x),
-    nbcar = d+((d-1)/3),
-    i = IBMax(nbcar,esp),
-    j,
-    k,
-    l = 0;
-    
-    s[i--] = '\0';
-    for (j=0; j<=i-nbcar; ++j) {
-        s[j] = ' ';
+  int d = _IBNbDigits(x),
+      nbcar = d+((d-1)/3),
+      i = IBMax(nbcar,esp),
+      j,
+      k,
+      l = 0;
+
+  s[i--] = '\0';
+  for (j=0; j<=i-nbcar; ++j) {
+    s[j] = ' ';
+  }
+
+  for (k=i; k>=j; --k) {
+    if (l==3) {
+      s[k] = ',';
+      l=0;
     }
-    
-    for (k=i; k>=j; --k) {
-        if (l==3) {
-            s[k] = ',';
-            l=0;
-        }
-        else {
-            s[k] = '0' + (x % 10);
-            x /= 10;
-            ++l;
-        }
+    else {
+      s[k] = '0' + (x % 10);
+      x /= 10;
+      ++l;
     }
+  }
 }
 
 #if SOFTWARE_PROFILE
 static inline void IBProfileIA() {
-    char s[20];
-    int esp = 0, n;
-    unsigned long total;
-    printf("  Number of interval operations:\n");
-    
-    total = IBNumberAdd+IBNumberSub+IBNumberMul+IBNumberDiv+IBNumberExtDiv+
-    IBNumberNthRootRel+IBNumberSqr+IBNumberSqrt+IBNumberPow+IBNumberExp+
-    IBNumberLog+IBNumberMin+IBNumberMax+
-    IBNumberCos+IBNumberSin+IBNumberTan+
-    IBNumberCosh+IBNumberSinh+IBNumberTanh+
-    IBNumberAcos+IBNumberAsin+IBNumberAtan+
-    IBNumberAcosh+IBNumberAsinh+IBNumberAtanh+
-    IBNumberCoshRel+IBNumberSinRel;
-    
-    if (esp<(n=_IBNbDigits(IBNumberAdd)))    esp=n;
-    if (esp<(n=_IBNbDigits(IBNumberSub)))    esp=n;
-    if (esp<(n=_IBNbDigits(IBNumberMul)))    esp=n;
-    if (esp<(n=_IBNbDigits(IBNumberDiv)))    esp=n;
-    if (esp<(n=_IBNbDigits(IBNumberExtDiv))) esp=n;
-    if (esp<(n=_IBNbDigits(IBNumberNthRootRel))) esp=n;
-    if (esp<(n=_IBNbDigits(IBNumberSqr)))    esp=n;
-    if (esp<(n=_IBNbDigits(IBNumberSqrt)))   esp=n;
-    if (esp<(n=_IBNbDigits(IBNumberPow)))    esp=n;
-    if (esp<(n=_IBNbDigits(IBNumberExp)))    esp=n;
-    if (esp<(n=_IBNbDigits(IBNumberLog)))    esp=n;
-    if (esp<(n=_IBNbDigits(IBNumberMin)))    esp=n;
-    if (esp<(n=_IBNbDigits(IBNumberMax)))    esp=n;
-    if (esp<(n=_IBNbDigits(IBNumberCos)))    esp=n;
-    if (esp<(n=_IBNbDigits(IBNumberSin)))    esp=n;
-    if (esp<(n=_IBNbDigits(IBNumberTan)))    esp=n;
-    if (esp<(n=_IBNbDigits(IBNumberCosh)))   esp=n;
-    if (esp<(n=_IBNbDigits(IBNumberSinh)))   esp=n;
-    if (esp<(n=_IBNbDigits(IBNumberTanh)))   esp=n;
-    if (esp<(n=_IBNbDigits(IBNumberAcos)))   esp=n;
-    if (esp<(n=_IBNbDigits(IBNumberAsin)))   esp=n;
-    if (esp<(n=_IBNbDigits(IBNumberAtan)))   esp=n;
-    if (esp<(n=_IBNbDigits(IBNumberAcosh)))  esp=n;
-    if (esp<(n=_IBNbDigits(IBNumberAsinh)))  esp=n;
-    if (esp<(n=_IBNbDigits(IBNumberAtanh)))  esp=n;
-    if (esp<(n=_IBNbDigits(IBNumberCoshRel))) esp=n;
-    if (esp<(n=_IBNbDigits(IBNumberSinRel)))  esp=n;
-    
-    if (esp<(n=_IBNbDigits(total)))          esp=n;
-    
-    
-    esp+=(esp-1)/3;
-    
-    if (IBNumberAdd>0) {
-        _IBprintlong(s,IBNumberAdd,esp);
-        printf("             add: %s\n",s);
-    }
-    
-    if (IBNumberSub>0) {
-        _IBprintlong(s,IBNumberSub,esp);
-        printf("             sub: %s\n",s);
-    }
-    
-    if (IBNumberMul>0) {
-        _IBprintlong(s,IBNumberMul,esp);
-        printf("             mul: %s\n",s);
-    }
-    
-    if (IBNumberDiv>0) {
-        _IBprintlong(s,IBNumberDiv+IBNumberExtDiv,esp);
-        printf("             div: %s\n",s);
-    }
-    
-    if (IBNumberExtDiv>0) {
-        _IBprintlong(s,IBNumberExtDiv,esp);
-        printf("            ediv: %s\n",s);
-    }
-    
-    if (IBNumberSqr>0) {
-        _IBprintlong(s,IBNumberSqr,esp);
-        printf("             sqr: %s\n",s);
-    }
-    
-    if (IBNumberSqrt>0) {
-        _IBprintlong(s,IBNumberSqrt,esp);
-        printf("            sqrt: %s\n",s);
-    }
-    
-    if (IBNumberNthRootRel>0) {
-        _IBprintlong(s,IBNumberNthRootRel,esp);
-        printf("       n-th root: %s\n",s);
-    }
-    
-    if (IBNumberPow>0) {
-        _IBprintlong(s,IBNumberPow,esp);
-        printf("             pow: %s\n",s);
-    }
-    
-    if (IBNumberExp>0) {
-        _IBprintlong(s,IBNumberExp,esp);
-        printf("             exp: %s\n",s);
-    }
-    
-    if (IBNumberLog>0) {
-        _IBprintlong(s,IBNumberLog,esp);
-        printf("             log: %s\n",s);
-    }
-    
-    if (IBNumberMin>0) {
-        _IBprintlong(s,IBNumberMin,esp);
-        printf("             min: %s\n",s);
-    }
-    
-    if (IBNumberMax>0) {
-        _IBprintlong(s,IBNumberMax,esp);
-        printf("             max: %s\n",s);
-    }
-    
-    if (IBNumberCos>0) {
-        _IBprintlong(s,IBNumberCos,esp);
-        printf("             cos: %s\n",s);
-    }
-    
-    if (IBNumberSin>0) {
-        _IBprintlong(s,IBNumberSin,esp);
-        printf("             sin: %s\n",s);
-    }
-    
-    if (IBNumberTan>0) {
-        _IBprintlong(s,IBNumberTan,esp);
-        printf("             tan: %s\n",s);
-    }
-    
-    if (IBNumberCosh>0) {
-        _IBprintlong(s,IBNumberCosh,esp);
-        printf("            cosh: %s\n",s);
-    }
-    
-    if (IBNumberSinh>0) {
-        _IBprintlong(s,IBNumberSinh,esp);
-        printf("            sinh: %s\n",s);
-    }
-    
-    if (IBNumberTanh>0) {
-        _IBprintlong(s,IBNumberTanh,esp);
-        printf("            tanh: %s\n",s);
-    }
-    
-    if (IBNumberAcos>0) {
-        _IBprintlong(s,IBNumberAcos,esp);
-        printf("            acos: %s\n",s);
-    }
-    
-    if (IBNumberAsin>0) {
-        _IBprintlong(s,IBNumberAsin,esp);
-        printf("            asin: %s\n",s);
-    }
-    
-    if (IBNumberAtan>0) {
-        _IBprintlong(s,IBNumberAtan,esp);
-        printf("            atan: %s\n",s);
-    }
-    
-    if (IBNumberAcosh>0) {
-        _IBprintlong(s,IBNumberAcosh,esp);
-        printf("           acosh: %s\n",s);
-    }
-    
-    if (IBNumberAsinh>0) {
-        _IBprintlong(s,IBNumberAsinh,esp);
-        printf("           asinh: %s\n",s);
-    }
-    
-    if (IBNumberAtanh>0) {
-        _IBprintlong(s,IBNumberAtanh,esp);
-        printf("           atanh: %s\n",s);
-    }
-    
-    if (IBNumberCoshRel>0) {
-        _IBprintlong(s,IBNumberCoshRel,esp);
-        printf("         coshrel: %s\n",s);
-    }
-    
-    if (IBNumberSinRel>0) {
-        _IBprintlong(s,IBNumberSinRel,esp);
-        printf("          sinrel: %s\n",s);
-    }
-    
-    if (total>0) {
-        printf("                  ");
-        for( n=0; n<strlen(s); ++n )
-        {
-            printf("-");
-        }
-        _IBprintlong(s,total,esp);
-        printf("\n           total: %s\n",s);
-    }
-    
-    if( total==0 )
+  char s[20];
+  int esp = 0, n;
+  unsigned long total;
+  printf("  Number of interval operations:\n");
+
+  total = IBNumberAdd+IBNumberSub+IBNumberMul+IBNumberDiv+IBNumberExtDiv+
+          IBNumberNthRootRel+IBNumberSqr+IBNumberSqrt+IBNumberPow+IBNumberExp+
+          IBNumberLog+IBNumberMin+IBNumberMax+
+          IBNumberCos+IBNumberSin+IBNumberTan+
+          IBNumberCosh+IBNumberSinh+IBNumberTanh+
+          IBNumberAcos+IBNumberAsin+IBNumberAtan+
+          IBNumberAcosh+IBNumberAsinh+IBNumberAtanh+
+          IBNumberCoshRel+IBNumberSinRel;
+
+  if (esp<(n=_IBNbDigits(IBNumberAdd)))    esp=n;
+  if (esp<(n=_IBNbDigits(IBNumberSub)))    esp=n;
+  if (esp<(n=_IBNbDigits(IBNumberMul)))    esp=n;
+  if (esp<(n=_IBNbDigits(IBNumberDiv)))    esp=n;
+  if (esp<(n=_IBNbDigits(IBNumberExtDiv))) esp=n;
+  if (esp<(n=_IBNbDigits(IBNumberNthRootRel))) esp=n;
+  if (esp<(n=_IBNbDigits(IBNumberSqr)))    esp=n;
+  if (esp<(n=_IBNbDigits(IBNumberSqrt)))   esp=n;
+  if (esp<(n=_IBNbDigits(IBNumberPow)))    esp=n;
+  if (esp<(n=_IBNbDigits(IBNumberExp)))    esp=n;
+  if (esp<(n=_IBNbDigits(IBNumberLog)))    esp=n;
+  if (esp<(n=_IBNbDigits(IBNumberMin)))    esp=n;
+  if (esp<(n=_IBNbDigits(IBNumberMax)))    esp=n;
+  if (esp<(n=_IBNbDigits(IBNumberCos)))    esp=n;
+  if (esp<(n=_IBNbDigits(IBNumberSin)))    esp=n;
+  if (esp<(n=_IBNbDigits(IBNumberTan)))    esp=n;
+  if (esp<(n=_IBNbDigits(IBNumberCosh)))   esp=n;
+  if (esp<(n=_IBNbDigits(IBNumberSinh)))   esp=n;
+  if (esp<(n=_IBNbDigits(IBNumberTanh)))   esp=n;
+  if (esp<(n=_IBNbDigits(IBNumberAcos)))   esp=n;
+  if (esp<(n=_IBNbDigits(IBNumberAsin)))   esp=n;
+  if (esp<(n=_IBNbDigits(IBNumberAtan)))   esp=n;
+  if (esp<(n=_IBNbDigits(IBNumberAcosh)))  esp=n;
+  if (esp<(n=_IBNbDigits(IBNumberAsinh)))  esp=n;
+  if (esp<(n=_IBNbDigits(IBNumberAtanh)))  esp=n;
+  if (esp<(n=_IBNbDigits(IBNumberCoshRel))) esp=n;
+  if (esp<(n=_IBNbDigits(IBNumberSinRel)))  esp=n;
+
+  if (esp<(n=_IBNbDigits(total)))          esp=n;
+
+
+  esp+=(esp-1)/3;
+
+  if (IBNumberAdd>0) {
+    _IBprintlong(s,IBNumberAdd,esp);
+    printf("             add: %s\n",s);
+  }
+
+  if (IBNumberSub>0) {
+    _IBprintlong(s,IBNumberSub,esp);
+    printf("             sub: %s\n",s);
+  }
+
+  if (IBNumberMul>0) {
+    _IBprintlong(s,IBNumberMul,esp);
+    printf("             mul: %s\n",s);
+  }
+
+  if (IBNumberDiv>0) {
+    _IBprintlong(s,IBNumberDiv+IBNumberExtDiv,esp);
+    printf("             div: %s\n",s);
+  }
+
+  if (IBNumberExtDiv>0) {
+    _IBprintlong(s,IBNumberExtDiv,esp);
+    printf("            ediv: %s\n",s);
+  }
+
+  if (IBNumberSqr>0) {
+    _IBprintlong(s,IBNumberSqr,esp);
+    printf("             sqr: %s\n",s);
+  }
+
+  if (IBNumberSqrt>0) {
+    _IBprintlong(s,IBNumberSqrt,esp);
+    printf("            sqrt: %s\n",s);
+  }
+
+  if (IBNumberNthRootRel>0) {
+    _IBprintlong(s,IBNumberNthRootRel,esp);
+    printf("       n-th root: %s\n",s);
+  }
+
+  if (IBNumberPow>0) {
+    _IBprintlong(s,IBNumberPow,esp);
+    printf("             pow: %s\n",s);
+  }
+
+  if (IBNumberExp>0) {
+    _IBprintlong(s,IBNumberExp,esp);
+    printf("             exp: %s\n",s);
+  }
+
+  if (IBNumberLog>0) {
+    _IBprintlong(s,IBNumberLog,esp);
+    printf("             log: %s\n",s);
+  }
+
+  if (IBNumberMin>0) {
+    _IBprintlong(s,IBNumberMin,esp);
+    printf("             min: %s\n",s);
+  }
+
+  if (IBNumberMax>0) {
+    _IBprintlong(s,IBNumberMax,esp);
+    printf("             max: %s\n",s);
+  }
+
+  if (IBNumberCos>0) {
+    _IBprintlong(s,IBNumberCos,esp);
+    printf("             cos: %s\n",s);
+  }
+
+  if (IBNumberSin>0) {
+    _IBprintlong(s,IBNumberSin,esp);
+    printf("             sin: %s\n",s);
+  }
+
+  if (IBNumberTan>0) {
+    _IBprintlong(s,IBNumberTan,esp);
+    printf("             tan: %s\n",s);
+  }
+
+  if (IBNumberCosh>0) {
+    _IBprintlong(s,IBNumberCosh,esp);
+    printf("            cosh: %s\n",s);
+  }
+
+  if (IBNumberSinh>0) {
+    _IBprintlong(s,IBNumberSinh,esp);
+    printf("            sinh: %s\n",s);
+  }
+
+  if (IBNumberTanh>0) {
+    _IBprintlong(s,IBNumberTanh,esp);
+    printf("            tanh: %s\n",s);
+  }
+
+  if (IBNumberAcos>0) {
+    _IBprintlong(s,IBNumberAcos,esp);
+    printf("            acos: %s\n",s);
+  }
+
+  if (IBNumberAsin>0) {
+    _IBprintlong(s,IBNumberAsin,esp);
+    printf("            asin: %s\n",s);
+  }
+
+  if (IBNumberAtan>0) {
+    _IBprintlong(s,IBNumberAtan,esp);
+    printf("            atan: %s\n",s);
+  }
+
+  if (IBNumberAcosh>0) {
+    _IBprintlong(s,IBNumberAcosh,esp);
+    printf("           acosh: %s\n",s);
+  }
+
+  if (IBNumberAsinh>0) {
+    _IBprintlong(s,IBNumberAsinh,esp);
+    printf("           asinh: %s\n",s);
+  }
+
+  if (IBNumberAtanh>0) {
+    _IBprintlong(s,IBNumberAtanh,esp);
+    printf("           atanh: %s\n",s);
+  }
+
+  if (IBNumberCoshRel>0) {
+    _IBprintlong(s,IBNumberCoshRel,esp);
+    printf("         coshrel: %s\n",s);
+  }
+
+  if (IBNumberSinRel>0) {
+    _IBprintlong(s,IBNumberSinRel,esp);
+    printf("          sinrel: %s\n",s);
+  }
+
+  if (total>0) {
+    printf("                  ");
+    for( n=0; n<strlen(s); ++n )
     {
-        printf("     0\n");
+      printf("-");
     }
-    
-    IBProfileInterval();
+    _IBprintlong(s,total,esp);
+    printf("\n           total: %s\n",s);
+  }
+
+  if( total==0 )
+  {
+    printf("     0\n");
+  }
+
+  IBProfileInterval();
 }
 #endif
 

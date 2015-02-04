@@ -130,10 +130,10 @@ int IBHC3AtanhI   (IBTree *f);
 /*-- to each operation symbol is associated a set of evaluation functions */
 struct IBO
 {
-    IBEvalOpI  eval;    /* interval evaluation operation */
-    IBEvalBwdI deriv;   /* interval derivation operation */
-    IBEvalHC4I inv;     /* interval inversion operation (HC4) */
-    IBEvalHC3I invhc3;  /* interval inversion operation (HC3) */
+  IBEvalOpI  eval;    /* interval evaluation operation */
+  IBEvalBwdI deriv;   /* interval derivation operation */
+  IBEvalHC4I inv;     /* interval inversion operation (HC4) */
+  IBEvalHC3I invhc3;  /* interval inversion operation (HC3) */
 };
 typedef struct IBO *IBOperations;
 
@@ -154,13 +154,13 @@ void IBTevalAll (IBTree *f, IBDomains d);
 
 
 /* Interval evaluation of expression f with domains d
- and domain domvar for variable globvar */
+   and domain domvar for variable globvar */
 void IBTeval (IBTree *f, IBItv domvar, int globvar, IBDomains d);
 
 
 /* Interval evaluation of expression f with domains d
- and domain domvar for variable globvar ; only the nodes depending on
- this variable are considered */
+   and domain domvar for variable globvar ; only the nodes depending on
+   this variable are considered */
 void IBTevalOnevar(IBTree *f, IBItv domvar, int globvar,
                    struct IBListDepNodes *list, IBDomains d);
 
@@ -173,12 +173,12 @@ void IBTevalConstant(IBTree *f);
 
 
 /* Evaluates with IBTevalConstant and replaces all free variables
- subtrees in f and returns the new tree */
+   subtrees in f and returns the new tree */
 IBTree *IBRemoveConstantSubtrees (IBTree *f);
 
 
 /* Interval evaluation of partial derivatives of the functional part of c
- the interval evaluation is supposed to be already computed */
+   the interval evaluation is supposed to be already computed */
 void IBCderiv(IBConstraint *c);
 
 #endif

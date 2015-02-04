@@ -19,10 +19,10 @@
 
 
 /* Can the domain d on variable i be bisected, given the precision p
- and the array of variables av ? */
+   and the array of variables av ? */
 #define IBIsDomainBisectable(av,i,d,p) ( (IBIsBranchVar(av,i)) && \
-(!IBCanonicalI(IBDomV(d,i))) && \
-(IBWidthI(IBDomV(d,i))>p) )
+                                         (!IBCanonicalI(IBDomV(d,i))) && \
+                                         (IBWidthI(IBDomV(d,i))>p) )
 
 
 /*------ Bisection functions */
@@ -32,7 +32,7 @@ void IBDListBisect2 (IBDList *dlist, int var, long *nbdom);  /* 2 parts */
 void IBDListBisect3 (IBDList *dlist, int var, long *nbdom);  /* 3 parts */
 
 
-#define IBBsplit2 IBDListBisect2
+#define IBBsplit2 IBDListBisect2 
 #define IBBsplit3 IBDListBisect3
 
 
@@ -56,10 +56,10 @@ int IBBisectVariableMN (IBDomains d, IBDomains dold, int var);  /* max reduction
 
 
 #define IBBisectIterate(subpaving,nbsol,nbdlist,parts,number) \
-( (nbdlist!=0) && \
-(subpaving ? \
-(nbsol+nbdlist+parts-1 <= number) : \
-(nbsol < number)) )
+   ( (nbdlist!=0) && \
+     (subpaving ? \
+      (nbsol+nbdlist+parts-1 <= number) : \
+      (nbsol < number)) )
 
 
 /*------ BISECTION ALGORITHM: returns the number of output boxes */

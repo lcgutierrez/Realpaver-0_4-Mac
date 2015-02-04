@@ -21,10 +21,10 @@ IBItv IBConstant_Pi_2;
 
 
 void IBInitIntervalConstants() {
-    /***************************************************************************
-     *
-     */
-    IBSetToPiI(IBConstantPi);
-    IBMulRposIinternal(IBConstant_2_Pi,2.0,IBConstantPi);
-    IBMulRposIinternal(IBConstant_Pi_2,0.5,IBConstantPi);
+/***************************************************************************
+*  
+*/
+  IBSetToPiI(IBConstantPi);
+  IBMulRposIinternal(IBConstant_2_Pi,2.0,IBConstantPi);
+  IBMulRposIinternal(IBConstant_Pi_2,0.5,IBConstantPi);
 }

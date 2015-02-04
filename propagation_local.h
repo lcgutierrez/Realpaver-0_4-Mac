@@ -22,8 +22,8 @@
 /*------ Management of modified domains */
 typedef struct
 {
-    int *dom;       /* indexes of modified domains */
-    int N;          /* number of modified domains  */
+  int *dom;       /* indexes of modified domains */
+  int N;          /* number of modified domains  */
 } IBDmodified;
 
 #define IBDMdom(d,i)  d->dom[i]
@@ -37,11 +37,11 @@ void         IBDMfree (IBDmodified *d);
 /*------ Management of propagation over a set of projections */
 typedef struct
 {
-    IBProjection **proj;   /* array of projections */
-    int first;             /* active projections between first... */
-    int end;               /* ...and end */
-    int size;
-    int N;
+  IBProjection **proj;   /* array of projections */
+  int first;             /* active projections between first... */
+  int end;               /* ...and end */
+  int size;
+  int N;
 } IBPropagationList;
 
 #define IBPLproj(l,i)    l->proj[i]
@@ -59,8 +59,8 @@ void               IBPLfree (IBPropagationList *l);
 /*------ Management of propagation given a set of modified domains */
 typedef struct
 {
-    unsigned long *a;
-    int N;
+ unsigned long *a;
+ int N;
 } IBPropagationGlobal;
 
 #define IBPGlobalNb(l) l->N
@@ -74,11 +74,11 @@ void                 IBPGlobalFree (IBPropagationGlobal *l);
 /*------ Management of propagation over a set of constraints */
 typedef struct
 {
-    IBConstraint **ctr;
-    int first;
-    int end;
-    int size;
-    int N;
+  IBConstraint **ctr;
+  int first;
+  int end;
+  int size;
+  int N;
 } IBPropagationListCtr;
 
 #define IBPLCctr(l,i)  l->ctr[i]

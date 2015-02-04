@@ -20,75 +20,75 @@ struct IBClockElem IBClock[IBNbClock];
 
 void IBClockInit()
 /***************************************************************************
- *  Initialization of clocks before utilisation
- */
+*  Initialization of clocks before utilisation
+*/
 {
-    int i;
-    for( i=0; i<IBNbClock; i++ )
-    {
-        IBClock[i].accu = 0;
-    }
+  int i;
+  for( i=0; i<IBNbClock; i++ )
+  {
+    IBClock[i].accu = 0;
+  }
 }
 
 
 inline void IBClockFree()
 /***************************************************************************
- *  Nothing to do !
- */
+*  Nothing to do !
+*/
 {
 }
 
 
 inline void IBClockBegin(int i)
 /***************************************************************************
- *  Beginning of timed operation number `i'
- */
+*  Beginning of timed operation number `i'
+*/
 {
-    long usrtime;
-    
-    IBGetTimes(usrtime);
-    IBClock[i].btime = usrtime;
+  long usrtime;
+
+  IBGetTimes(usrtime);
+  IBClock[i].btime = usrtime;
 }
 
 
 inline void IBClockEnd(int i)
 /***************************************************************************
- *  End of timed operation number `i'
- *  Amount of time between `btime' and now is summed in `accu'
- */
+*  End of timed operation number `i'
+*  Amount of time between `btime' and now is summed in `accu'
+*/
 {
-    long usrtime;
-    
-    IBGetTimes(usrtime);
-    IBClock[i].accu += (usrtime - IBClock[i].btime);
+  long usrtime;
+
+  IBGetTimes(usrtime);
+  IBClock[i].accu += (usrtime - IBClock[i].btime);
 }
 
 
 inline long IBClockGet(int i)
 /***************************************************************************
- *  Returns the value in `accu'
- */
+*  Returns the value in `accu'
+*/
 {
-    return( IBClock[i].accu );
+  return( IBClock[i].accu );
 }
 
 
 inline void IBClockSet(int i, long t)
 /***************************************************************************
- *  Set the time for the i-th operation
- */
+*  Set the time for the i-th operation
+*/
 {
-    IBClock[i].accu = t;
+  IBClock[i].accu = t;
 }
 
 
 inline long IBClockObserve (int i)
 /***************************************************************************
- *  Elapsed time since the last IBClockBegin(i)
- */
+*  Elapsed time since the last IBClockBegin(i)
+*/
 {
-    long usrtime;
-    
-    IBGetTimes(usrtime);
-    return( usrtime - IBClock[i].btime );
+  long usrtime;
+
+  IBGetTimes(usrtime);
+  return( usrtime - IBClock[i].btime );
 }

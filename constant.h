@@ -21,8 +21,8 @@
 
 struct IBCo
 {
-    char *name;    /* name of constant */
-    IBItv value;   /* value of constant */
+  char *name;    /* name of constant */
+  IBItv value;   /* value of constant */
 };
 
 struct IBConst

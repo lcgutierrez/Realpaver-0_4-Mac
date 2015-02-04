@@ -24,7 +24,7 @@
 
 typedef struct
 {      double left;
-    double right;
+       double right;
 } IBBasicBounds;
 typedef IBBasicBounds IBBasicItv[1];  /* using IBBasicItv wrt. IBBasicBounds is optimal */
 
@@ -60,12 +60,12 @@ static IBBasicItv IBBasicItvConst_7_Pi_2;
 
 /* i1=i2 ? */
 #define _IBBasicIeqI(i1,i2)       ((IBBasicLeftI(i1)==IBBasicLeftI(i2)) && \
-(IBBasicRightI(i1)==IBBasicRightI(i2)))
+                                  (IBBasicRightI(i1)==IBBasicRightI(i2)))
 #define  IBBasicIeqI(i1,i2)       _IBBasicIeqI(i1[0],i2[0])
 
 /* i1!=i2 ? */
 #define _IBBasicIdiffI(i1,i2)     ((IBBasicLeftI(i1)!=IBBasicLeftI(i2)) || \
-(IBBasicRightI(i1)!=IBBasicRightI(i2)))
+                                  (IBBasicRightI(i1)!=IBBasicRightI(i2)))
 #define  IBBasicIdiffI(i1,i2)     _IBBasicIdiffI(i1[0],i2[0])
 
 
@@ -78,7 +78,7 @@ static IBBasicItv IBBasicItvConst_7_Pi_2;
 
 /* i=[n,n] ? */
 #define _IBBasicIsIntegerI(i)     ( (IBBasicLeftI(i)==IBBasicRightI(i)) && \
-(IBBasicLeftI(i)==((int)IBBasicLeftI(i))) )
+                                    (IBBasicLeftI(i)==((int)IBBasicLeftI(i))) )
 #define  IBBasicIsIntegerI(i)     _IBBasicIsIntegerI(i[0])
 
 /* i=[0,0] ? */
@@ -87,23 +87,23 @@ static IBBasicItv IBBasicItvConst_7_Pi_2;
 
 /* i1 included in i2 ? */
 #define _IBBasicIncludedII(i1,i2) ((IBBasicLeftI(i1)>=IBBasicLeftI(i2)) && \
-(IBBasicRightI(i1)<=IBBasicRightI(i2)))
+                                  (IBBasicRightI(i1)<=IBBasicRightI(i2)))
 #define  IBBasicIncludedII(i1,i2) _IBBasicIncludedII(i1[0],i2[0])
 
 /* i1 and i2 disjoint ? */
 #define _IBBasicDisjointII(i1,i2) ((IBBasicRightI(i1)<IBBasicLeftI(i2)) || \
-(IBBasicRightI(i2)<IBBasicLeftI(i1)))
+                                  (IBBasicRightI(i2)<IBBasicLeftI(i1)))
 #define  IBBasicDisjointII(i1,i2) _IBBasicDisjointII(i1[0],i2[0])
 
 
 /* i has an infinite bound ? */
 #define _IBBasicInfinite(i)       ((IBBasicLeftI(i)==IBBasicNegInfinity) || \
-((IBBasicRightI(i)==IBBasicPosInfinity)))
+                                  ((IBBasicRightI(i)==IBBasicPosInfinity)))
 #define  IBBasicInfinite(i)       _IBBasicInfinite(i[0])
 
 /* i has no infinite bound ? */
 #define _IBBasicFinite(i)         ((IBBasicLeftI(i)!=IBBasicNegInfinity) && \
-((IBBasicRightI(i)!=IBBasicPosInfinity)))
+                                  ((IBBasicRightI(i)!=IBBasicPosInfinity)))
 #define  IBBasicFinite(i)         _IBBasicFinite(i[0])
 
 /* width of i */
@@ -112,12 +112,12 @@ static IBBasicItv IBBasicItvConst_7_Pi_2;
 
 /* distance between i and j */
 #define _IBBasicDistanceII(i,j)   ((IBBasicLeftI(j)-IBBasicLeftI(i))+ \
-(IBBasicRightI(i)-IBBasicRightI(j)))
+                                   (IBBasicRightI(i)-IBBasicRightI(j)))
 #define  IBBasicDistanceII(i,j)   _IBBasicDistanceII(i[0],j[0])
 
 /* real number at the center of i */
 #define _IBBasicMidI(i)           IBBasicCenter(IBBasicLeftI(i),IBBasicRightI(i))
-#define  IBBasicMidI(i)           _IBBasicMidI(i[0])
+#define  IBBasicMidI(i)           _IBBasicMidI(i[0])      
 
 /* see IBBasicThird for explanation */
 #define _IBBasicThirdI(i)         IBBasicThird(IBBasicLeftI(i),IBBasicRightI(i))
@@ -129,14 +129,14 @@ static IBBasicItv IBBasicItvConst_7_Pi_2;
 
 /* i contains at most two floating-point numbers */
 #define _IBBasicCanonicalI(i) \
-( ((IBBasicLeftI(i)==IBBasicNegInfinity) && (IBBasicRightI(i)==IBBasicMinDouble)) || \
-((IBBasicLeftI(i)==IBBasicMaxDouble) && (IBBasicRightI(i)==IBBasicPosInfinity)) || \
-(IBBasicRightI(i)<=IBBasicNextDouble(IBBasicLeftI(i))) )
+   ( ((IBBasicLeftI(i)==IBBasicNegInfinity) && (IBBasicRightI(i)==IBBasicMinDouble)) || \
+     ((IBBasicLeftI(i)==IBBasicMaxDouble) && (IBBasicRightI(i)==IBBasicPosInfinity)) || \
+     (IBBasicRightI(i)<=IBBasicNextDouble(IBBasicLeftI(i))) )
 #define  IBBasicCanonicalI(i)     _IBBasicCanonicalI(i[0])
 
 /* i := empty interval */
 #define _IBBasicSetEmptyI(i)      IBBasicRightI(i) = IBBasicNegInfinity; \
-IBBasicLeftI(i) = IBBasicPosInfinity
+                                  IBBasicLeftI(i) = IBBasicPosInfinity
 #define  IBBasicSetEmptyI(i)      _IBBasicSetEmptyI(i[0])
 
 /* i := [x1,x2] */
@@ -145,7 +145,7 @@ IBBasicLeftI(i) = IBBasicPosInfinity
 
 /* i := source */
 #define _IBBasicCopyI(i,source)   IBBasicLeftI(i) = IBBasicLeftI(source); \
-IBBasicRightI(i) = IBBasicRightI(source)
+                                  IBBasicRightI(i) = IBBasicRightI(source)
 #define  IBBasicCopyI(i,source)   _IBBasicCopyI(i[0],source[0])
 
 
@@ -226,37 +226,37 @@ void IBBasicSubIRinternal    (IBBasicItv Result, IBBasicItv i, double x);
 
 
 /*-- Result := Result inter (num/den) where num/den uses the extended
- division over intervals -> used in Gauss-Seidel iterations --*/
+     division over intervals -> used in Gauss-Seidel iterations --*/
 int IBBasicExtendedDivisionInterII (IBBasicItv Result, IBBasicItv num, IBBasicItv den);
 
 /*-- Computes (num/den) using the extended division over intervals
- Returns:
- 1 if num/den = Result1
- 2 if num/den = Result1 union Result2 --*/
+     Returns:
+           1 if num/den = Result1
+           2 if num/den = Result1 union Result2 --*/
 int IBBasicExtendedDivisionII(IBBasicItv Result1, IBBasicItv Result2,
                               IBBasicItv num, IBBasicItv den);
 
 /*-- Computes the relational n-root of i
- Returns:
- 0 if the result is empty (when i<0)
- 1 if the n-root of i = Result1
- 2 if the n-root of i = Result1 union Result2 --*/
+     Returns:
+           0 if the result is empty (when i<0)
+           1 if the n-root of i = Result1
+           2 if the n-root of i = Result1 union Result2 --*/
 int IBBasicNthRootRelI(IBBasicItv Result1, IBBasicItv Result2,
                        IBBasicItv i, IBBasicItv n);
 
 /*-- Computes the relational hyperbolic cosine of i
- Returns:
- 0 if the result is empty (when i<1.0)
- 1 if the result = Result1
- 2 if the result = Result1 union Result2 --*/
+     Returns:
+           0 if the result is empty (when i<1.0)
+           1 if the result = Result1
+           2 if the result = Result1 union Result2 --*/
 int IBBasicCoshRelI(IBBasicItv Result1, IBBasicItv Result2, IBBasicItv i);
 
 /*-- Computes the relational sine of i => result in [-pi, +pi]
- Returns:
- 0 if the result is empty (when i<1.0)
- 1 if the result = Result1
- 2 if the result = Result1 union Result2
- 3 if the result = Result1 union Result2 union Result3 --*/
+     Returns:
+           0 if the result is empty (when i<1.0)
+           1 if the result = Result1
+           2 if the result = Result1 union Result2
+           3 if the result = Result1 union Result2 union Result3 --*/
 int IBBasicSinRelI(IBBasicItv Result1, IBBasicItv Result2, IBBasicItv Result3, IBBasicItv i);
 
 /*-- i := smallest interval containing Pi */
@@ -273,8 +273,8 @@ void IBBasicSetToE(IBBasicItv i);
 
 
 /*-- Result <- mid - eval/deriv   such that deriv does not contain 0.0
- Returns 0 if Result is not modified, 1 otherwise
- Used in Newton narrowing operator --*/
+     Returns 0 if Result is not modified, 1 otherwise
+     Used in Newton narrowing operator --*/
 int IBBasicNewtonNonzeroII(IBBasicItv Result, IBBasicItv mid, IBBasicItv eval, IBBasicItv deriv);
 
 /*-- Equivalent function for the case 0.0 in deriv */

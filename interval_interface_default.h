@@ -40,7 +40,7 @@
 #define IBPrevReal(x)                IBBasicPrevDouble(x)
 
 /* Rounding modes */
-#define IBRoundDown()                IBBasicRoundDown()
+#define IBRoundDown()                IBBasicRoundDown() 
 #define IBRoundUp()                  IBBasicRoundUp()
 #define IBRoundNear()                IBBasicRoundNear()
 
@@ -84,19 +84,19 @@
 #  define IBMidpointOfI(i)           _IBBasicMidI(i)
 
 /* Bisection of i=[a,b] in three equal parts :
- |-|-|-|
- a x   b
- Returns x */
+   |-|-|-|
+   a x   b
+   Returns x */
 #  define IBThirdOfI(i)              _IBBasicThirdI(i)
 
 /* Bisection of i=[a,b] in three equal parts :
- |-|-|-|
- a   y b
- Returns y */
+   |-|-|-|
+   a   y b
+   Returns y */
 #  define IBTwoThirdsOfI(i)          _IBBasicTwoThirdsI(i)
 
 /* Returns true if i contains at most two floating point numbers :
- i is either [a,a] or [a,a+] */
+   i is either [a,a] or [a,a+] */
 #  define IBIsCanonicalI(i)          _IBBasicCanonicalI(i)
 
 /* i := empty interval */
@@ -110,321 +110,321 @@
 
 /* Returns a pointer to a new interval in memory */
 static inline IBInterval* IBCreateNewI() {
-    return IBBasicNewI();
+  return IBBasicNewI();
 }
 
 /* Returns a pointer to a new interval in memory which value is [-oo,+oo] */
 static inline IBInterval* IBCreateNewRealDomainI() {
-    return IBBasicNewLargestI();
+  return IBBasicNewLargestI();
 }
 
 /* Returns a pointer to a new interval in memory which value is a copy of *i */
 static inline IBInterval* IBCreateAndCopyNewI(IBInterval* i) {
-    return IBBasicNewCopyI(i);
+  return IBBasicNewCopyI(i);
 }
 
 /* Returns a pointer to a new interval in memory which value is [x1,x2] */
 static inline IBInterval* IBCreateAndSetNewI(double x1, double x2) {
-    return IBBasicSetNewI(x1,x2);
+  return IBBasicSetNewI(x1,x2);
 }
 
 /* *i := [-oo,+oo] */
 static inline void IBSetToRealDomain(IBInterval* i) {
-    IBBasicToLargestI(i);
+  IBBasicToLargestI(i);
 }
 
 /* *i := [ceil(inf i), floor(sup i)] */
 static inline void IBSetToIntegerDomain(IBInterval* i) {
-    IBBasicToIntegerI(i);
+  IBBasicToIntegerI(i);
 }
 
 /* j := intersection of i1 and i2 */
 static inline void IBIntersectionII(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBBasicInterII(j,i1,i2);
+  IBBasicInterII(j,i1,i2);
 }
 
 /* Print the value of *i in output file out :
- - digits is the number of digits of bounds to be printed
- - The value of mode is:
- * IBPrintIntervalBounds:   *i is written '[a,b]'
- * IBPrintIntervalMidError: *i is written 'midpoint + [-e,e]'
- */
+   - digits is the number of digits of bounds to be printed
+   - The value of mode is:
+     * IBPrintIntervalBounds:   *i is written '[a,b]'
+     * IBPrintIntervalMidError: *i is written 'midpoint + [-e,e]'
+*/
 static inline void IBPrintI(FILE *out, IBInterval* i, int digits, int mode, int verbose) {
-    IBBasicWriteI(out,i,digits,mode,verbose);
+  IBBasicWriteI(out,i,digits,mode,verbose);
 }
 
 /* conversion of a string representing a float to an interval */
 static inline void IBStringToI(char *s, IBInterval* i) {
-    IBBasicStringToI(s,i);
+  IBBasicStringToI(s,i);
 }
 
 /* j := i1 + i2 */
 static inline void IBAdditionII(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBBasicAddII(j,i1,i2);
+  IBBasicAddII(j,i1,i2);
 }
 
 /* j := i1 + i2, i1 being a pointer to an interval point [x,x] */
 static inline void IBAdditionRI(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBBasicAddRI(j,i1,i2);
+  IBBasicAddRI(j,i1,i2);
 }
 
 /* j := i1 - i2 */
 static inline void IBSubstractionII(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBBasicSubII(j,i1,i2);
+  IBBasicSubII(j,i1,i2);
 }
 
 /* j := i1 - i2, i1 being a pointer to an interval point [x,x] */
 static inline void IBSubstractionRI(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBBasicSubRI(j,i1,i2);
+  IBBasicSubRI(j,i1,i2);
 }
 
 /* j := i1 - i2, i2 being a pointer to an interval point [x,x] */
 static inline void IBSubstractionIR(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBBasicSubIR(j,i1,i2);
+  IBBasicSubIR(j,i1,i2);
 }
 
 /* j := -i */
 static inline void IBNegationI(IBInterval* j, IBInterval* i, IBInterval* useless) {
-    IBBasicNegI(j,i,useless);
+  IBBasicNegI(j,i,useless);
 }
 
 /* j := i1 * i2 */
 static inline void IBMultiplicationII(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBBasicMulII(j,i1,i2);
+  IBBasicMulII(j,i1,i2);
 }
 
 /* j := i1 * i2, i1 being a pointer to an interval point [x,x] */
 static inline void IBMultiplicationRI(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBBasicMulRI(j,i1,i2);
+  IBBasicMulRI(j,i1,i2);
 }
 
 /* j := i1 * i2, i1 being a pointer to an interval point [x,x], x<=0 */
 static inline void IBMultiplicationRnegI(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBBasicMulRnegI(j,i1,i2);
+  IBBasicMulRnegI(j,i1,i2);
 }
 
 /* j := i1 * i2, i1 being a pointer to an interval point [x,x], x>=0 */
 static inline void IBMultiplicationRposI(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBBasicMulRposI(j,i1,i2);
+  IBBasicMulRposI(j,i1,i2);
 }
 
 /* j := i1 / i2 */
 static inline void IBDivisionII(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBBasicDivII(j,i1,i2);
+  IBBasicDivII(j,i1,i2);
 }
 
 /* j := i1 / i2, i2 being a pointer to an interval point [x,x] */
 static inline void IBDivisionIR(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBBasicDivIR(j,i1,i2);
+  IBBasicDivIR(j,i1,i2);
 }
 
 /* j := i1 / i2, i1 being a pointer to an interval point [x,x] */
 static inline void IBDivisionRI(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBBasicDivRI(j,i1,i2);
+  IBBasicDivRI(j,i1,i2);
 }
 
 /* j := i1 / i2, i2 being a pointer to an interval point [x,x], x <= 0 */
 static inline void IBDivisionIRneg(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBBasicDivIRneg(j,i1,i2);
+  IBBasicDivIRneg(j,i1,i2);
 }
 
 /* j := i1 / i2, i2 being a pointer to an interval point [x,x], x>=0 */
 static inline void IBDivisionIRpos(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBBasicDivIRpos(j,i1,i2);
+  IBBasicDivIRpos(j,i1,i2);
 }
 
 /* j := i1 / i2, i1 being a pointer to an interval point [x,x], x<=0 */
 static inline void IBDivisionRnegI(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBBasicDivRnegI(j,i1,i2);
+  IBBasicDivRnegI(j,i1,i2);
 }
 
 /* j := i1 / i2, i1 being a pointer to an interval point [x,x], x>=0 */
 static inline void IBDivisionRposI(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBBasicDivRposI(j,i1,i2);
+  IBBasicDivRposI(j,i1,i2);
 }
 
 /* j := square(i1) */
 static inline void IBSquareI(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBBasicSqrI(j,i1,i2);
+  IBBasicSqrI(j,i1,i2);
 }
 
 /* j := square_root(i1) */
 static inline void IBSquareRoot(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBBasicSqrtI(j,i1,i2);
+  IBBasicSqrtI(j,i1,i2);
 }
 
 /* j := i1 power i2, i2 being a pointer to an interval point [n,n], n natural */
 static inline void IBPowerIR(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBBasicPowI(j,i1,i2);
+  IBBasicPowI(j,i1,i2);
 }
 
 /* j := exp(i1) */
 static inline void IBExponentialI(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBBasicExpI(j,i1,i2);
+  IBBasicExpI(j,i1,i2);
 }
 
 /* j := log(i1) with base e */
 static inline void IBLogarithmI(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBBasicLogI(j,i1,i2);
+  IBBasicLogI(j,i1,i2);
 }
 
 /* j := min(i1,i2) */
 static inline void IBMinimumOfII(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBBasicMinimumII(j,i1,i2);
+  IBBasicMinimumII(j,i1,i2);
 }
 
 /* j := max(i1,i2) */
 static inline void IBMaximumOfII(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBBasicMaximumII(j,i1,i2);
+  IBBasicMaximumII(j,i1,i2);
 }
 
 /* j := cos(i1) */
 static inline void IBCosineI(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBBasicCosI(j,i1,i2);
+  IBBasicCosI(j,i1,i2);
 }
 
 /* j := sin(i1) */
 static inline void IBSineI(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBBasicSinI(j,i1,i2);
+  IBBasicSinI(j,i1,i2);
 }
 
 /* j := tan(i1) */
 static inline void IBTangentI(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBBasicTanI(j,i1,i2);
+  IBBasicTanI(j,i1,i2);
 }
 
 /* j := cosh(i1) */
 static inline void IBCosHypI(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBBasicCoshI(j,i1,i2);
+  IBBasicCoshI(j,i1,i2);
 }
 
 /* j := sinh(i1) */
 static inline void IBSinHypI(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBBasicSinhI(j,i1,i2);
+  IBBasicSinhI(j,i1,i2);
 }
 
 /* j := tanh(i1) */
 static inline void IBTanHypI(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBBasicTanhI(j,i1,i2);
+  IBBasicTanhI(j,i1,i2);
 }
 
 /* j := acos(i1) */
 static inline void IBArcCosI(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBBasicAcosI(j,i1,i2);
+  IBBasicAcosI(j,i1,i2);
 }
 
 /* j := asin(i1) */
 static inline void IBArcSinI(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBBasicAsinI(j,i1,i2);
+  IBBasicAsinI(j,i1,i2);
 }
 
 /* j := atan(i1) */
 static inline void IBArcTanI(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBBasicAtanI(j,i1,i2);
+  IBBasicAtanI(j,i1,i2);
 }
 
 /* j := acosh(i1) */
 static inline void IBArcCosHypI(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBBasicAcoshI(j,i1,i2);
+  IBBasicAcoshI(j,i1,i2);
 }
 
 /* j := asinh(i1) */
 static inline void IBArcSinHypI(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBBasicAsinhI(j,i1,i2);
+  IBBasicAsinhI(j,i1,i2);
 }
 
 /* j := atanh(i1) */
 static inline void IBArcTanHypI(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    IBBasicAtanhI(j,i1,i2);
+  IBBasicAtanhI(j,i1,i2);
 }
 
 /*-- Computes (i1/i2) using the extended division over intervals
- Returns:
- 1 if j := num/den
- 2 if (j union k) := num/den */
+     Returns:
+           1 if j := num/den
+           2 if (j union k) := num/den */
 static inline int IBExtendedDivisionII(IBInterval* j, IBInterval* k,
-                                       IBInterval* i1, IBInterval* i2) {
-    return IBBasicExtendedDivisionII(j,k,i1,i2);
+                                            IBInterval* i1, IBInterval* i2) {
+  return IBBasicExtendedDivisionII(j,k,i1,i2);
 }
 
 /* j := j intersection (i1 / i2), / is the extended division over intervals
- Returns 1 if j is not modified, 0 otherwise */
+   Returns 1 if j is not modified, 0 otherwise */
 static inline int IBExtendedDivisionInterII(IBInterval* j, IBInterval* i1, IBInterval* i2) {
-    return IBBasicExtendedDivisionInterII(j,i1,i2);
+  return IBBasicExtendedDivisionInterII(j,i1,i2);
 }
 
 /* relational n-th root of i */
 static inline int IBNthRootRelationalI(IBInterval* j, IBInterval* k,
                                        IBInterval* i, IBInterval* n) {
-    return IBBasicNthRootRelI(j,k,i,n);
+  return IBBasicNthRootRelI(j,k,i,n);
 }
 
 /* relational hyperbolic cosine of i */
 static inline int IBCoshRelationalI(IBInterval* j, IBInterval* k, IBInterval* i) {
-    return IBBasicCoshRelI(j,k,i);
+  return IBBasicCoshRelI(j,k,i);
 }
 
 /* relational sine of i */
 static inline int IBSinRelationalI(IBInterval* j, IBInterval* k, IBInterval* l,
                                    IBInterval* i) {
-    return IBBasicSinRelI(j,k,l,i);
+  return IBBasicSinRelI(j,k,l,i);
 }
 
 /* j := x * i, x>=0 */
 static inline void IBMulRealposI(IBInterval* j, double x, IBInterval* i) {
-    IBBasicMulRposIinternal(j,x,i);
+  IBBasicMulRposIinternal(j,x,i);
 }
 
 /* j := x * i */
 static inline void IBMulRealI(IBInterval* j, double x, IBInterval* i) {
-    IBBasicMulRIinternal(j,x,i);
+  IBBasicMulRIinternal(j,x,i);
 }
 
 /* j := x / i, x>=0 */
 static inline void IBDivRealposI(IBInterval* j, double x, IBInterval* i) {
-    IBBasicDivRposIinternal(j,x,i);
+  IBBasicDivRposIinternal(j,x,i);
 }
 
 /* j := i^n */
 static inline void IBPowerIN(IBInterval* j, IBInterval* i, int n) {
-    IBBasicPowIinternal(j,i,n);
+  IBBasicPowIinternal(j,i,n);
 }
 
 /* j := j intersection (m - e/d), 0 not in d
- Returns 0 if j is not modified, 1 otherwise */
+   Returns 0 if j is not modified, 1 otherwise */
 static inline int IBNewtonStepNonzeroII(IBInterval* j, IBInterval* m, IBInterval* e, IBInterval* d) {
-    return IBBasicNewtonNonzeroII(j,m,e,d);
+  return IBBasicNewtonNonzeroII(j,m,e,d);
 }
 
 /* j := j intersection (m - e/d), 0 in d
- Returns 0 if j is not modified, 1 otherwise */
+   Returns 0 if j is not modified, 1 otherwise */
 static inline int IBNewtonStepZeroII(IBInterval* j, IBInterval* m, IBInterval* e, IBInterval* d) {
-    return IBBasicNewtonZeroII(j,m,e,d);
+  return IBBasicNewtonZeroII(j,m,e,d);
 }
 
 /* i := hull({pi}) */
 static inline void IBSetEnclosePi(IBInterval* i) {
-    IBBasicSetToPi(i);
+  IBBasicSetToPi(i);
 }
 
 /* i := hull({pi/2}) */
 static inline void IBSetEncloseHalfPi(IBInterval* i) {
-    IBBasicSetToHalfPi(i);
+  IBBasicSetToHalfPi(i);
 }
 
 /* i := hull({ln(2)}) */
 static inline void IBSetEncloseLn2(IBInterval* i) {
-    IBBasicSetToLn2(i);
+  IBBasicSetToLn2(i);
 }
 
 /* i := hull({e}) */
 static inline void IBSetEncloseE(IBInterval* i) {
-    IBBasicSetToE(i);
+  IBBasicSetToE(i);
 }
 
 /* Initialization for the interval arithmetic module */
 static inline void IBInitInterval() {
-    IBBasicIntervalInit();
+  IBBasicIntervalInit();
 }
 
 /* Profiling information for the interval arithmetic module */

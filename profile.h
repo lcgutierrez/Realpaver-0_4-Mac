@@ -17,9 +17,42 @@
 #include <stdlib.h>
 #include <time.h>
 #include <sys/resource.h>
+#include "config.h"
+
+
+/****************************************************************************
+ *                                  SPARC                                   *
+ ****************************************************************************/
+#if SYSTEM_SPARC
+
+struct rusage IBRsrUsage;
+
+#define IBGetTimes(usr_time)                                        \
+    getrusage(RUSAGE_SELF,&IBRsrUsage);                             \
+                                                                    \
+    usr_time=IBRsrUsage.ru_utime.tv_sec*1000 +                      \
+               IBRsrUsage.ru_utime.tv_usec/1000
+
+/****************************************************************************
+ *                             PC i386 & linux                              *
+ ****************************************************************************/
+#elif SYSTEM_LINUX_IX86
 
 #define IBGetTimes(usr_time) \
-usr_time = (long)(((clock()/(double)CLOCKS_PER_SEC))*1000.0)
+       usr_time = (long)(((clock()/(double)CLOCKS_PER_SEC))*1000.0)
+
+
+/****************************************************************************
+ *                                MIPS SGI                                  *
+ ****************************************************************************/
+#elif SYSTEM_SGI
+
+#define IBGetTimes(usr_time) \
+       usr_time = (long)(((clock()/(double)CLOCKS_PER_SEC))*1000.0)
+
+#endif
+/****************************************************************************/
+
 
 #define IBNbClock 10
 
@@ -36,8 +69,8 @@ usr_time = (long)(((clock()/(double)CLOCKS_PER_SEC))*1000.0)
 /* clock type */
 struct IBClockElem
 {
-    long btime;   /* starting time of operation which is timed */
-    long accu;    /* total accumulated time */
+  long btime;   /* starting time of operation which is timed */
+  long accu;    /* total accumulated time */
 };
 
 /* clock functions */

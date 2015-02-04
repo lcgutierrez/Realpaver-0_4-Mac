@@ -69,41 +69,41 @@
 
 
 static int IBOpDerivable[] = { 1,   /* IBOpAddII */
-    1,   /* IBOpAddRI */
-    1,   /* IBOpSubII */
-    1,   /* IBOpSubRI */
-    1,   /* IBOpSubIR */
-    1,   /* IBOpNegI */
-    1,   /* IBOpMulII */
-    1,   /* IBOpMulRI */
-    1,   /* IBOpMulRnegI */
-    1,   /* IBOpMulRposI */
-    1,   /* IBOpDivII */
-    1,   /* IBOpDivIR */
-    1,   /* IBOpDivRI */
-    1,   /* IBOpDivIRneg */
-    1,   /* IBOpDivIRpos */
-    1,   /* IBOpDivRnegI */
-    1,   /* IBOpDivRposI */
-    1,   /* IBOpSqrI */
-    1,   /* IBOpSqrtI */
-    1,   /* IBOpPowI */
-    1,   /* IBOpExpI */
-    1,   /* IBOpLogI */
-    0,   /* IBOpMinII */
-    0,   /* IBOpMaxII */
-    1,   /* IBOpCosI */
-    1,   /* IBOpSinI */
-    0,   /* IBOpTanI */
-    1,   /* IBOpCoshI */
-    1,   /* IBOpSinhI */
-    1,   /* IBOpTanhI */
-    1,   /* IBOpAcosI */
-    1,   /* IBOpAsinI */
-    1,   /* IBOpAtanI */
-    0,   /* IBOpAcoshI */
-    1,   /* IBOpAsinhI */
-    0 }; /* IBOpAtanhI */
+                               1,   /* IBOpAddRI */
+                               1,   /* IBOpSubII */
+                               1,   /* IBOpSubRI */
+                               1,   /* IBOpSubIR */
+                               1,   /* IBOpNegI */
+                               1,   /* IBOpMulII */
+                               1,   /* IBOpMulRI */
+                               1,   /* IBOpMulRnegI */
+                               1,   /* IBOpMulRposI */
+                               1,   /* IBOpDivII */
+                               1,   /* IBOpDivIR */
+                               1,   /* IBOpDivRI */
+                               1,   /* IBOpDivIRneg */
+                               1,   /* IBOpDivIRpos */
+                               1,   /* IBOpDivRnegI */
+                               1,   /* IBOpDivRposI */
+                               1,   /* IBOpSqrI */
+                               1,   /* IBOpSqrtI */
+                               1,   /* IBOpPowI */
+                               1,   /* IBOpExpI */
+                               1,   /* IBOpLogI */
+                               0,   /* IBOpMinII */
+                               0,   /* IBOpMaxII */
+                               1,   /* IBOpCosI */
+                               1,   /* IBOpSinI */
+                               0,   /* IBOpTanI */
+                               1,   /* IBOpCoshI */
+                               1,   /* IBOpSinhI */
+                               1,   /* IBOpTanhI */
+                               1,   /* IBOpAcosI */
+                               1,   /* IBOpAsinI */
+                               1,   /* IBOpAtanI */
+                               0,   /* IBOpAcoshI */
+                               1,   /* IBOpAsinhI */
+                               0 }; /* IBOpAtanhI */
 
 
 #define IBOpIsDerivable(i) IBOpDerivable[i]
@@ -120,7 +120,7 @@ static int IBOpDerivable[] = { 1,   /* IBOpAddII */
 union IBValTree
 {
     int var[2];  /* var[0]: index of variable in the global array of variables
-                  var[1]: index of variable in the local array of variables */
+                    var[1]: index of variable in the local array of variables */
     int op;      /* index of operation symbol */
     IBItv i;     /* interval constant or exponent */
 };
@@ -168,9 +168,9 @@ int     IBTDerivable  (IBTree *f);
 
 typedef struct
 {
-    int ctr;
-    int locvar;
-    int asleep;     /* used in filtering algorithms to know if projection has to
+  int ctr;
+  int locvar;
+  int asleep;     /* used in filtering algorithms to know if projection has to
                      be used or not */
 } IBProjection;   /* projection of ctr over locvar */
 
@@ -180,48 +180,48 @@ typedef struct
 
 struct IBListDepNodes
 {
-    IBTree *t;
-    struct IBListDepNodes *next;
+  IBTree *t;
+  struct IBListDepNodes *next;
 };
 
 
 /* information on one variable of a given constraint */
 typedef struct
 {
-    int globvar;
-    int nbocc;
-    IBItv deriv;
-    IBTree *function;             /* for example, nested form for box consistency */
-    struct IBListDepNodes *list;  /* nodes of the tree depending on this variable */
+  int globvar;
+  int nbocc;
+  IBItv deriv;
+  IBTree *function;             /* for example, nested form for box consistency */
+  struct IBListDepNodes *list;  /* nodes of the tree depending on this variable */
 } IBClocvar;
 
 typedef struct
 {
-    IBTree *left;
-    IBTree *right;
-    int rel;             /* constraint is: left rel right */
-    
-    IBTree *function;    /* left if right=0, right if left=0, left-right otherwise */
-    int relfunc;         /* relation symbol for constraint 'function relfunc 0' */
-    /* relfunc different from rel since it can be inverted */
-    
-    IBClocvar *vars;     /* informations concerning variables in the constraint */
-    int Nvar;            /* number of variables in the constraint */
-    
-    char *name;          /* constraint name */
-    
-    IBProjection **pone; /* projections over variables with one occurrence */
-    int Npone;           /* the number of such projections */
-    IBProjection **pmul; /* projections over variables with multiple occurrences */
-    int Npmul;           /* the number of such projections */
-    
-    int asleep;          /* flag for propagation in HC4 */
-    
-    long numdom;         /* flag to know for which domains the constraint has been
+  IBTree *left;
+  IBTree *right;
+  int rel;             /* constraint is: left rel right */
+
+  IBTree *function;    /* left if right=0, right if left=0, left-right otherwise */
+  int relfunc;         /* relation symbol for constraint 'function relfunc 0' */
+                       /* relfunc different from rel since it can be inverted */
+
+  IBClocvar *vars;     /* informations concerning variables in the constraint */
+  int Nvar;            /* number of variables in the constraint */
+
+  char *name;          /* constraint name */
+
+  IBProjection **pone; /* projections over variables with one occurrence */
+  int Npone;           /* the number of such projections */
+  IBProjection **pmul; /* projections over variables with multiple occurrences */
+  int Npmul;           /* the number of such projections */
+
+  int asleep;          /* flag for propagation in HC4 */
+
+  long numdom;         /* flag to know for which domains the constraint has been
                           evaluated in HC3revise or HC4revise -> then it has not
                           to be evaluated in Gauss-Seidel */
-    
-    int IsPartOfModel;   /* 1 if the constraint is part of the model,
+
+  int IsPartOfModel;   /* 1 if the constraint is part of the model,
                           0 if the constraint is redundant
                           Useful for the test of INNER box */
 } IBConstraint;
@@ -280,14 +280,14 @@ typedef struct IBCstr *IBConstraints;
 
 IBConstraints IBNewConstraints ();
 void          IBAddConstraint  (IBConstraints a, IBTree *l, int rel,
-                                IBTree *r, char *s,
-                                int isPartOfModel);
+                                                 IBTree *r, char *s,
+                                                 int isPartOfModel);
 
 void          IBAddIntegerTypeConstraints (IBConstraints a, IBVariables av);
 
 void          IBDecompConstraint (IBConstraints a, IBVariables av, IBTree *l,
-                                  int rel, IBTree *r, char *s,
-                                  int isPartOfModel);
+                                                   int rel, IBTree *r, char *s,
+                                                   int isPartOfModel);
 
 void          IBReallocConstraints (IBConstraints a);
 void          IBWriteConstraints   (FILE *out, IBConstraints a);

@@ -71,9 +71,9 @@
 #define VERSION "0.4"
 
 /* Define to 1 if `lex' declares `yytext' as a `char *' by default, not a
- `char[]'. */
+   `char[]'. */
 #define YYTEXT_POINTER 1
 
 /* Define as `__inline' if that's what the C compiler calls it, or to nothing
- if it is not supported. */
+   if it is not supported. */
 /* #undef inline */

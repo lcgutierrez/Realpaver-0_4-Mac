@@ -22,16 +22,16 @@
 
 typedef struct
 {
-    int var;         /* previous bisected variable in the round-robin strategy */
-    IBDomains d;     /* domains */
+  int var;         /* previous bisected variable in the round-robin strategy */
+  IBDomains d;     /* domains */
 } IBDListInfo;
 
 #define IBDListInfoCopy(copy,source) \
-(copy).var = (source).var; \
-IBCopyD((copy).d,(source).d,IBVnb(variables))
+  (copy).var = (source).var; \
+  IBCopyD((copy).d,(source).d,IBVnb(variables))
 
 #define IBDListInfoWrite(x) \
-IBWriteVdom(stdout,x.d,variables,IBPragmaIntervalDigits,IBPragmaStyleInterval)
+   IBWriteVdom(stdout,x.d,variables,IBPragmaIntervalDigits,IBPragmaStyleInterval)
 
 #define IBDListInfoAlloc(x) (x).d = IBNewD(IBVnb(variables))
 
@@ -39,17 +39,17 @@ IBWriteVdom(stdout,x.d,variables,IBPragmaIntervalDigits,IBPragmaStyleInterval)
 
 typedef struct
 {
-    IBDListInfo info;
+  IBDListInfo info;
 } IBDListElement;
 
 #define IBDListAllocUnit 10
 
 typedef struct
 {
-    IBDListElement elem[IBDListAllocUnit];
-    int first;
-    int last;
-    int nb;
+  IBDListElement elem[IBDListAllocUnit];
+  int first;
+  int last;
+  int nb;
 } IBDListArrayElements;
 
 #define IBDListArrayNextIndex(x) x = (x+1) % IBDListAllocUnit
@@ -60,16 +60,16 @@ typedef struct
 /* Doubly linked lists */
 typedef struct IBDListCell
 {
-    IBDListArrayElements elem;
-    struct IBDListCell* prev;
-    struct IBDListCell* next;
+  IBDListArrayElements elem;
+  struct IBDListCell* prev;
+  struct IBDListCell* next;
 } IBDListCell;
 
 typedef struct
 {
-    IBDListCell* first;
-    IBDListCell* last;
-    int ncell;
+  IBDListCell* first;
+  IBDListCell* last;
+  int ncell;
 } IBDList;
 
 
@@ -77,24 +77,24 @@ typedef struct
 #define IBDListNotEmpty(l) (!IBDListEmpty(l))
 
 #define IBDListNbElements(l) \
-( (l->ncell==0) ? \
-0 : \
-( (l->ncell==1) ? \
-(l->first->elem.nb) : \
-((l->ncell-2)*IBDListAllocUnit + \
-l->first->elem.nb + \
-l->last->elem.nb) ) )
+   ( (l->ncell==0) ? \
+        0 : \
+        ( (l->ncell==1) ? \
+             (l->first->elem.nb) : \
+             ((l->ncell-2)*IBDListAllocUnit + \
+                 l->first->elem.nb + \
+                 l->last->elem.nb) ) )
 
 
 /* Functions that return the next domain to consider */
 typedef IBDomains   (* IBDListGetDomain)(IBDList *);
 
 static inline IBDomains IBDListGetFirstDomain(IBDList* l) {
-    return l->first->elem.elem[l->first->elem.first].info.d;
+  return l->first->elem.elem[l->first->elem.first].info.d;
 }
 
 static inline IBDomains IBDListGetLastDomain(IBDList* l) {
-    return l->last->elem.elem[l->last->elem.last].info.d;
+  return l->last->elem.elem[l->last->elem.last].info.d;
 }
 
 

@@ -43,39 +43,17 @@ extern double nextafter();
 
 extern double pow(double,double);
 
-/****************************************************************************
- *                             PC i386 & linux                              *
- ****************************************************************************/
-/*
-#if SYSTEM_LINUX_IX86
 
-#  include <fenv.h>
-#  include <values.h>
+#include <fenv.h>
+#include <limits.h>
+#include <float.h>
 
-#  define RoundDownward    fesetround(FE_DOWNWARD)
-#  define RoundUpward      fesetround(FE_UPWARD)
-#  define RoundNearest     fesetround(FE_TONEAREST)
+#define RoundDownward    fesetround(FE_DOWNWARD)
+#define RoundUpward      fesetround(FE_UPWARD)
+#define RoundNearest     fesetround(FE_TONEAREST)
 
-#  define IBBasicInfinity  HUGE_VAL
-#  define IBBasicMaxDouble MAXDOUBLE
-*/
-
-/****************************************************************************
- *                                DARWIN                                    *
- ****************************************************************************/
-
-#  include <fenv.h>
-#  include <float.h>
-
-#  define RoundDownward    fesetround(3)
-#  define RoundUpward      fesetround(2)
-#  define RoundNearest     fesetround(0)
-
-static const double IBBasicInfinity = 1.0/0.0;
-static const double IBBasicMaxDouble = DBL_MAX;
-
-
-/****************************************************************************/
+#define IBBasicInfinity  HUGE_VAL
+#define IBBasicMaxDouble DBL_MAX
 
 #define IBBasicConstPi       3.14159265358979323846
 #define IBBasicConstHalfPi   1.57079632679489661923
@@ -94,113 +72,113 @@ static const double IBBasicMaxDouble = DBL_MAX;
 
 
 static inline double IBBasicBisectionPoint(double x, double y, int h, int n) {
-    /***************************************************************************
-     * Subdivision of interval [x,y] :
-     *      x   x+(1/h)(y-x)   x+(2/h)(y-x)   ...   x+(h/h)(y-x)==y
-     *
-     *   Returns x + (n/h)(y-x)
-     *
-     *   Output guarantee: if [x,y] contains at least three floating-point numbers,
-     *   then the result is included in ]x,y[
-     *
-     *   Input Conditions: x <= y and not (x==y==-oo or x==y==+oo), 1 <= n <= h
-     */
-    double a = IBBasicMax(x,IBBasicMinDouble),
-    b = IBBasicMin(IBBasicMaxDouble,y),
-    c;
-    
-    if (a==b) {    /* [r,r] [-oo,MinReal], [MaxReal,+oo] */
-        return a;
+/***************************************************************************
+* Subdivision of interval [x,y] :
+*      x   x+(1/h)(y-x)   x+(2/h)(y-x)   ...   x+(h/h)(y-x)==y  
+*
+*   Returns x + (n/h)(y-x)
+*
+*   Output guarantee: if [x,y] contains at least three floating-point numbers,
+*   then the result is included in ]x,y[
+*
+*   Input Conditions: x <= y and not (x==y==-oo or x==y==+oo), 1 <= n <= h
+*/
+  double a = IBBasicMax(x,IBBasicMinDouble),
+         b = IBBasicMin(IBBasicMaxDouble,y),
+         c;
+
+  if (a==b) {    /* [r,r] [-oo,MinReal], [MaxReal,+oo] */
+    return a;
+  }
+  else if (nextafter(a,IBBasicPosInfinity)==b) {  /* [r,r+], [-oo,succ MinReal], [pred MaxReal,+oo] */
+    if (x==IBBasicNegInfinity) {
+      return IBBasicMinDouble;
     }
-    else if (nextafter(a,IBBasicPosInfinity)==b) {  /* [r,r+], [-oo,succ MinReal], [pred MaxReal,+oo] */
-        if (x==IBBasicNegInfinity) {
-            return IBBasicMinDouble;
-        }
-        else if (y==IBBasicPosInfinity) {
-            return IBBasicMaxDouble;
-        }
-        else {
-            return a;
-        }
+    else if (y==IBBasicPosInfinity) {
+      return IBBasicMaxDouble;
     }
-    else {    /* [r,s], s> succ r */
-        c = a + (((double)n)/((double)h))*(b-a);
-        if ((c>a) && (c<b)) {
-            return c;
-        }
-        else {
-            return nextafter(a,IBBasicPosInfinity);
-        }
+    else {
+      return a;
     }
+  }
+  else {    /* [r,s], s> succ r */
+    c = a + (((double)n)/((double)h))*(b-a);
+    if ((c>a) && (c<b)) {
+      return c;
+    }
+    else {
+      return nextafter(a,IBBasicPosInfinity);
+    }
+  }
 }
 
 
 static double IBBasicPowReal(double x, int n)
 /***************************************************************************
- *  Returns x^n
- */
+*  Returns x^n
+*/
 {
-    double y = x, z = 1.0;
-    for( ;; )
+  double y = x, z = 1.0;
+  for( ;; )
+  {
+    if( IBBasicIsOdd(n) )
     {
-        if( IBBasicIsOdd(n) )
-        {
-            z *= y;
-            n >>= 1;
-            if( n==0 ) return( z );
-        }
-        else n >>= 1;
-        y *= y;
+      z *= y;
+      n >>= 1;
+      if( n==0 ) return( z );
     }
+    else n >>= 1;
+    y *= y;
+  }
 }
 
 
 static double IBBasicNthRoot(double x, int n, int round, double epsilon)
 /***************************************************************************
- *  Returns the n-th root of x
- *  round=1 (downward) ; round=2 (upward)
- */
+*  Returns the n-th root of x
+*  round=1 (downward) ; round=2 (upward)
+*/
 {
-    double y;
-    
-    if( x==1.0 )
-    {
-        return( 1.0 );
+  double y;
+
+  if( x==1.0 )
+  {
+    return( 1.0 );
+  }
+  else if( x==0.0 )
+  {
+    return( 0.0 );
+  }
+  else if( n==2 )
+  {
+    if (round==1) {
+      RoundDownward;
     }
-    else if( x==0.0 )
-    {
-        return( 0.0 );
+    else {
+      RoundUpward;
     }
-    else if( n==2 )
+    return( sqrt(x) );
+  }
+  else
+  {
+    RoundNearest;
+    if( x<0.0 )
     {
-        if (round==1) {
-            RoundDownward;
-        }
-        else {
-            RoundUpward;
-        }
-        return( sqrt(x) );
+      y = -(exp((1.0/n)*log(-(x))));
     }
     else
     {
-        RoundNearest;
-        if( x<0.0 )
-        {
-            y = -(exp((1.0/n)*log(-(x))));
-        }
-        else
-        {
-            y = exp((1.0/n)*log(x));
-        }
-        if (round==1) {
-            RoundDownward;
-            return( y-epsilon );
-        }
-        else {
-            RoundUpward;
-            return( y+epsilon );
-        }
+      y = exp((1.0/n)*log(x));
     }
+    if (round==1) {
+      RoundDownward;
+      return( y-epsilon );
+    }
+    else {
+      RoundUpward;
+      return( y+epsilon );
+    }
+  }
 }
 
 

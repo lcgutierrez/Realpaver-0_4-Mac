@@ -37,35 +37,35 @@ typedef int (* IBPropagation)(IBDomains, IBDmodified *, IBLocalPropagation);
 /* 2B consistency-based propagation algorithms -> propagation algorithms */
 
 static inline int IBFhc3       (IBDomains d, IBDmodified *dm, IBLocalPropagation useless) {
-    return IBFilteringHC3decomp(d,dm);
+  return IBFilteringHC3decomp(d,dm);
 }
 
 static inline int IBFhc4I      (IBDomains d, IBDmodified *dm, IBLocalPropagation useless) {
-    return IBFilteringHC3(d,dm);
+  return IBFilteringHC3(d,dm);
 }
 
 static inline int IBFhc4       (IBDomains d, IBDmodified *dm, IBLocalPropagation useless) {
-    return IBFilteringHC4(d,dm);
+  return IBFilteringHC4(d,dm);
 }
 
 static inline int IBFhc4Newton (IBDomains d, IBDmodified *dm, IBLocalPropagation useless) {
-    return IBFilteringHC4Newton(d,dm);
+  return IBFilteringHC4Newton(d,dm);
 }
 
 static inline int IBFbc3       (IBDomains d, IBDmodified *dm, IBLocalPropagation useless) {
-    return IBFilteringBC3(d,dm);
+  return IBFilteringBC3(d,dm);
 }
 
 static inline int IBFbc3Newton (IBDomains d, IBDmodified *dm, IBLocalPropagation useless) {
-    return IBFilteringBC3Newton(d,dm);
+  return IBFilteringBC3Newton(d,dm);
 }
 
 static inline int IBFbc4       (IBDomains d, IBDmodified *dm, IBLocalPropagation useless) {
-    return IBFilteringBC4(d,dm);
+  return IBFilteringBC4(d,dm);
 }
 
 static inline int IBFbc5       (IBDomains d, IBDmodified *dm, IBLocalPropagation useless) {
-    return IBFilteringBC5(d,dm);
+  return IBFilteringBC5(d,dm);
 }
 
 /*--- FILTERING ALGORITHM for << weak 3B(w) CONSISTENCY >> */

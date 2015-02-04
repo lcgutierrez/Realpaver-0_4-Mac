@@ -26,8 +26,8 @@
 
 typedef struct
 {
-    int nb;
-    double **coeff;    /* square matrix nb*nb */
+   int nb;
+   double **coeff;    /* square matrix nb*nb */
 }
 IBMDouble;
 
@@ -43,8 +43,8 @@ void       IBMDoubleCopy        (IBMDouble *mcopy, IBMDouble *msource);
 
 typedef struct
 {
-    int nb;
-    IBItv **coeff;     /* square matrix nb*nb */
+   int nb;
+   IBItv **coeff;     /* square matrix nb*nb */
 }
 IBMInterval;
 
